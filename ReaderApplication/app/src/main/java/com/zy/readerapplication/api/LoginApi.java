@@ -61,7 +61,7 @@ public class LoginApi {
         params.put("loginPwd", loginPwd);
         JSONObject json = new JSONObject(params);
         String data = OkHttpUtils.post(LOGIN_BASE_URL, json.toString());
-        Log.i("data", data);
+        Log.e("data", data);
     }
 
     public static void LoginByWeiXin(String appId, String weixin) throws IOException {
@@ -82,5 +82,13 @@ public class LoginApi {
         String data = OkHttpUtils.post(LOGIN_BASE_URL, json.toString());
     }
 
-
+    public static void FirstPage(int userId, String appId, String number) throws IOException {
+        ConcurrentHashMap params = new ConcurrentHashMap();
+        params.put("userId", userId);
+        params.put("appId", appId);
+        params.put("number", number);
+        JSONObject json = new JSONObject(params);
+        String data = OkHttpUtils.post("http://xx.com/bookstore/index", json.toString());
+        Log.i("data", data);
+    }
 }

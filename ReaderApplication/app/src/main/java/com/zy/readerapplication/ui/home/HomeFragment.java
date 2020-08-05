@@ -1,6 +1,7 @@
 package com.zy.readerapplication.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zy.readerapplication.R;
 import com.zy.readerapplication.adaptors.MyAdapter;
 import com.zy.readerapplication.api.LoginApi;
+import com.zy.readerapplication.httpurlconnectionutil.HttpUtils;
+import com.zy.readerapplication.httpurlconnectionutil.callback.HttpCallbackStringListener;
 import com.zy.readerapplication.model.StudentBean;
+import com.zy.readerapplication.utils.OkHttpUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HomeFragment extends Fragment {
 
@@ -49,7 +54,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    LoginApi.SignUpByAccountNumber("wx0ef12d8e82574dc6", "gaojan", "123456");
+                    //LoginApi.SignUpByAccountNumber("wx0ef12d8e82574dc6", "gaojan", "123456");
+                    //LoginApi.FirstPage(11946175, "wxbd19a3cc171ae7ec", "1");
+                    String data = OkHttpUtils.get("http://www.baidu.com");
+                    //Log.i("data", data);
+                    ConcurrentHashMap params = new ConcurrentHashMap();
+                    params.put("isReg", 1);//0登录，1注册
+                    params.put("loginType", 2);
+                    params.put("appId", "wx1ef004191d6c5923");
+                    params.put("loginName", "loginName");
+                    params.put("loginPwd", "loginPwd");
+                    HttpUtils.doPost(getContext(), "http://xx.com/user/login", new HttpCallbackStringListener() {
+                        @Override
+                        public void onFinish(String response) {
+                            Log.i("response", response);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    }, params);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
