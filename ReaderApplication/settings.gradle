@@ -1,0 +1,3 @@
+include ':nevolreader'
+include ':app'
+rootProject.name = "ReaderApplication"
